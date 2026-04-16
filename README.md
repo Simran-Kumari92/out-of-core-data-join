@@ -1,4 +1,4 @@
-# Assignment 1: Out-of-Core Data Join
+# 🚀 Assignment 1: Out-of-Core Data Join
 
 
 ## Overview
@@ -44,13 +44,13 @@ The solution implements a **chunk-based hash join**, a practical adaptation of t
 ## Sample Data Preview
 
 ### Users Dataset
-![Users](assets/users.png)
+![Users](assets/data/users.png)
 
 ### Transactions Dataset
-![Transactions](assets/transactions.png)
+![Transactions](assets/data/transactions.png)
 
 ### Result (Joined Output)
-![Result](assets/result.png)
+![Result](assets/data/result.png)
 
 ---
 
@@ -102,13 +102,13 @@ python join/chunk_join.py
 - Add indexing or pre-sorting to reduce lookup time  
 
 ---
+---
+---
 
 
 
 
-
-
-# Assignment 2: Non-Blocking API
+# 🚀 Assignment 2: Non-Blocking API
 
 
 ## Overview
@@ -117,10 +117,13 @@ This assignment extends the join solution into a non-blocking backend API. The s
 
 Demonstrates backend scalability, concurrency, and asynchronous processing.
 
+---
 
 ## Problem Statement
 
 Build an API that allows users to trigger a large-scale join operation without blocking the server.
+
+---
 
 ## Requirements:
 
@@ -129,6 +132,7 @@ Build an API that allows users to trigger a large-scale join operation without b
 * Support multiple concurrent requests
 * Each request must be uniquely tracked
 
+---
 
 ## Approach
 
@@ -160,6 +164,7 @@ The system provides two approaches to handle background execution:
 3. API returns immediately with job_id
 4. Thread executes join independently
 
+---
 
 ## API Endpoints
 
@@ -169,24 +174,29 @@ POST /trigger-join
 ### Trigger Join (Thread-Based)
 POST /trigger-join-thread
 
+---
+
 ## Concurrency Design
 * Each request generates a unique job_id
 * Multiple jobs run independently
 * No blocking of API responses
 * Separate output files ensure isolation
 
+---
 
 ## Logging
 
 Logs are stored in:
 logs/app.log
 
+---
 
 ## Tracks:
 * Job start
 * Job completion
 * Execution type (Background / Thread)
 
+---
 
 ## Approaches Comparison
 
@@ -198,7 +208,7 @@ logs/app.log
 | Control         | Less control              | More control    |
 | Complexity      | Low                       | Moderate        |
 
-
+---
 
 ## Tech Stack
 
@@ -207,24 +217,44 @@ logs/app.log
 * Uvicorn (ASGI server)
 * Threading (Concurrency handling)
 
+---
 
 ## How to Run
 
 ### Start API Server
+```bash
 python -m uvicorn api.main:app --reload
+```
 
 ### Open API Docs
+```bash
 http://127.0.0.1:8000/docs
+```
 
 ## Output
-data/result_<job_id>.csv
 
+Each API request generates a separate output file:
 
+- `data/result_f47b0dbb-918f-47c8-88cd-5563cab9ef7c.csv`
+
+### Details:
+
+- Contains the result of the **INNER JOIN** between users and transactions  
+- Each file is uniquely identified using `job_id`  
+- Ensures **no data overwrite** when multiple jobs run concurrently  
+- Output is generated asynchronously after the API response  
+
+### Example:
+
+- `data/result_b79fae1e-4abf-4a54-8714-cced7de36e3d.csv`
+- `data/result_89b91067-4642-4c9b-8f7e-04274d177e4f.csv`
+
+---
 
 ## Execution Proof
 
 ### API Running (Uvicorn Server)
-![API Running](assets/terminal/api_start.png.png)
+![API Running](assets/terminal/api_start.png)
 
 ### Job Execution (Chunk Processing)
 ![Job Execution](assets/terminal/job_execution.png)
@@ -235,7 +265,7 @@ data/result_<job_id>.csv
 ### Logging (Thread-Based Concurrency)
 ![Logs Thread](assets/logs_screenshots/thread_concurrency.png)
 
-
+---
 
 ## Possible Improvements
 * Integrate distributed task queues (e.g., Celery + Redis)
@@ -243,3 +273,4 @@ data/result_<job_id>.csv
 * Implement retry mechanism for failed jobs
 * Introduce queue management system for large workloads
 
+---
