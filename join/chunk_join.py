@@ -57,7 +57,7 @@ def join_files(users_file, transactions_file, output_file):
                     }
                     writer.writerow(merged_row)
 
-    print("✅ Join completed. Output saved to:", output_file)
+    print("Join completed. Output saved to:", output_file)
 
 
 if __name__ == "__main__":

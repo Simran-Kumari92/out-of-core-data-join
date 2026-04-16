@@ -1,9 +1,11 @@
+import logging
+import os
+
 from fastapi import FastAPI, BackgroundTasks
 import uuid
 import sys
 import os
 
-# Fix import path (IMPORTANT)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from join.chunk_join import join_files
@@ -11,8 +13,17 @@ from join.chunk_join import join_files
 app = FastAPI()
 
 
+os.makedirs("logs", exist_ok=True)
+
+logging.basicConfig(
+    filename="logs/app.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+
 def run_join(job_id: str):
-    print(f"🚀 Job {job_id} started")
+    logging.info(f"Job {job_id} started")
 
     join_files(
         "data/users.csv",
@@ -20,8 +31,7 @@ def run_join(job_id: str):
         f"data/result_{job_id}.csv"
     )
 
-    print(f"✅ Job {job_id} completed")
-
+    logging.info(f"Job {job_id} completed")
 
 @app.post("/trigger-join")
 def trigger_join(background_tasks: BackgroundTasks):

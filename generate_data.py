@@ -5,7 +5,7 @@ def generate_data():
     print("Generating datasets...")
 
     # Users
-    num_users = 5_000_000
+    num_users = 100000 #5_000_000
     users = pd.DataFrame({
         'user_id': np.arange(1, num_users + 1),
         'name': ['User_' + str(i) for i in range(num_users)],
@@ -16,7 +16,7 @@ def generate_data():
     print("users.csv created")
 
     # Transactions
-    num_transactions = 10_000_000
+    num_transactions = 200000 #10_000_000
     transactions = pd.DataFrame({
         'transaction_id': np.arange(1, num_transactions + 1),
         'user_id': np.random.randint(1, num_users + 1, size=num_transactions),
