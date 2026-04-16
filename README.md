@@ -44,13 +44,13 @@ The solution implements a **chunk-based hash join**, a practical adaptation of t
 ## Sample Data Preview
 
 ### Users Dataset
-![Users](assets/data/users.png)
+![Users](./assets/data/users.png)
 
 ### Transactions Dataset
-![Transactions](assets/data/transactions.png)
+![Transactions](./assets/data/transactions.png)
 
 ### Result (Joined Output)
-![Result](assets/data/result.png)
+![Result](./assets/data/result.png)
 
 ---
 
